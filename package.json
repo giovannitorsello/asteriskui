@@ -1,0 +1,28 @@
+{
+  "name": "asteriskgui",
+  "version": "1.0.0",
+  "description": "A graphical interface to Asterisk based on ami-ui",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giovannitorsello/asteriskui.git"
+  },
+  "keywords": [
+    "asterisk",
+    "gui",
+    "ami-io"
+  ],
+  "author": "Giovanni Torsello",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/giovannitorsello/asteriskui/issues"
+  },
+  "homepage": "https://github.com/giovannitorsello/asteriskui#readme",
+  "dependencies": {
+    "ami-io": "^1.2.1",
+    "winston": "^3.2.1"
+  }
+}
