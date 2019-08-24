@@ -1,44 +1,40 @@
-var amilib = require("ami-io");
-var logger = require("./logger.js").logger;
+//Schedule offline jobs
+var schedule = require('node-schedule');
+
+//Date formatting and internationalization
+var moment = require('moment');
+
+//HTML form utility
+var express = require('express');
+var bodyParser = require('body-parser');
+var express_formidable = require('express-formidable');
+var session = require('express-session');
+var formidable = require('formidable');
+var multer = require('multer');
 
 
+//general filesystem utilities
+var fs = require('fs');
+var path = require('path');
 
-var amisrv = amilib.createClient({ host: '127.0.0.1', port: '5038', login: 'admin', password: 'admin', encoding: 'ascii' });
-amisrv.useLogger(logger);
+// Needed fo xls import-export
+var xlsx = require('xlsx');
+var xlsx_node = require('node-xlsx');
+var xlsx_json = require('xlsx-parse-json');
+
+//asterisk Server
+var asterisk=require("./asterisk.js");
+
+//Import configuration
+var config=require("./config.json");
 
 
-amisrv.on('incorrectServer', function () {
-    amisrv.logger.error("Invalid AMI welcome message. Are you sure if this is AMI?");
-    process.exit();
-});
-amisrv.on('connectionRefused', function () {
-    amisrv.logger.error("Connection refused.");
-    process.exit();
-});
-amisrv.on('incorrectLogin', function () {
-    amisrv.logger.error("Incorrect login or password.");
-    process.exit();
-});
-amisrv.on('event', function (event) {
-    amisrv.logger.info('event:', event);
-});
-amisrv.connect();
-amisrv.on('connected', function () {
+asterisk.connect(config);
+setTimeout(function(){
+    asterisk.getSipPeers();
+},3000);
+//setTimeout(function(){asterisk.disconnect();},5000);
 
-    sendAction();
+console.log("Cache object");
 
-    setTimeout(function () {
-        amisrv.disconnect();
-        amisrv.on('disconnected', process.exit());
-    }, 30000);
-});
-
-function sendAction() {
-    var action = new amilib.Action.ShowDialPlan();
-    amisrv.send(action, function (err, data) {
-        if (err) {
-            console.log(err);
-        }
-        console.log(data);
-    });
-}
+schedule.scheduleJob("10 * * * * *",function (){/*console.log(asterisk.cache.peers);*/});

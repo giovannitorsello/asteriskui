@@ -1,3 +1,7 @@
+//Import configuration
+var config=require("./config.json");
+
+
 var winston = require("winston");
 
 const winstonLogger = winston.createLogger({
@@ -27,10 +31,10 @@ const winstonLogger = winston.createLogger({
 
 
 exports.logger= {
-    trace: function(data) {
-      console.log(data);},
+    trace: function(strlog,data) {
+      /*console.log(data);*/},
     debug: function(strlog,data) {
-      console.log(data);},
+      /*console.log(data);*/},
     info:  function(strlog,data) {
       console.log(strlog,data);},
     warn:  function(strlog,data) {
