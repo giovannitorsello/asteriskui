@@ -23,8 +23,8 @@
   "homepage": "https://github.com/giovannitorsello/asteriskui#readme",
   "dependencies": {
     "ami-io": "^1.2.1",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
     "express-formidable": "^1.2.0",
     "express-session": "^1.16.2",
     "formidable": "^1.2.1",
